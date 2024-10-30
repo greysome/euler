@@ -1,0 +1,8 @@
+# Don't include solutions to problem 101 and above
+**/[123456789][0123456789][0123456789]_*
+**/[123456789][0123456789][0123456789]
+!**/[123456789][0123456789][0123456789]_*.gpg
+!**/100_*
+
+# Used to encrypt solution files for >= 101
+solutions-past-100.txt

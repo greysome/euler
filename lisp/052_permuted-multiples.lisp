@@ -1,0 +1,18 @@
+(defun my-condition (n)
+  (let ((digits1 (digits n))
+	(digits2 (digits (* 2 n)))
+	(digits3 (digits (* 3 n)))
+	(digits4 (digits (* 4 n)))
+	(digits5 (digits (* 5 n)))
+	(digits6 (digits (* 6 n))))
+    (and
+     (same-elements digits1 digits2)
+     (same-elements digits1 digits3)
+     (same-elements digits1 digits4)
+     (same-elements digits1 digits5)
+     (same-elements digits1 digits6))))
+
+(dorange (i 1 1000000)
+  (when (my-condition i)
+    (format t "~d~%" i)
+    (return)))

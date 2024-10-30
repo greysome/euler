@@ -1,0 +1,7 @@
+(let ((sum 0))
+  (do ((i 2 (+ i j))
+       (j 1 i))
+      ((>= j 4000000))
+    (when (evenp i)
+      (incf sum i)))
+  sum)

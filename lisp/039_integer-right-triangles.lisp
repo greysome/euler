@@ -1,0 +1,16 @@
+(defun count-solutions (p)
+  (let ((solutions 0))
+    (doranges ((a 1 (1+ (floor (/ p 3))))
+	       (b a (1+ (floor (/ (- p a) 2)))))
+      (when (= (+ (* a a) (* b b))
+	       (* (- p a b) (- p a b)))
+	(incf solutions)))
+    solutions))
+
+(let ((max-solutions 0) (max-p 0))
+  (dorange (p 1 1001)
+    (let ((solutions (count-solutions p)))
+      (when (> solutions max-solutions)
+	(setf max-solutions solutions
+	      max-p p))))
+  (values max-solutions max-p))

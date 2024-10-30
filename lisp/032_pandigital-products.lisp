@@ -1,0 +1,38 @@
+(defun f (a b)
+  (values
+   (num-digits (* (expt 10 (dec a)) (expt 10 (dec b))))
+   (num-digits (* (dec (expt 10 a))
+		  (dec (expt 10 b))))))
+
+(doranges ((i 1 8) (j i (- 9 i)))
+  (multiple-value-bind (n m) (f i j)
+    (when (<= n (- 9 i j) m)
+      (format t "~d ~d ~d~%" i j (- 9 i j)))))
+
+(defun has-all-digits (a b c)
+  (let ((unique-digits '()))
+    (mapc (lambda (x) (pushnew x unique-digits)) (digits a))
+    (mapc (lambda (x) (pushnew x unique-digits)) (digits b))
+    (mapc (lambda (x) (pushnew x unique-digits)) (digits c))
+    (and (= (length unique-digits) 9)
+	 (not (member 0 unique-digits)))))
+
+(defun pandigital-product-p (n)
+  (doranges ((i 1 10) (j 1000 10000))
+    (when (and (= (* i j) n)
+	       (has-all-digits i j n))
+      (return-from pandigital-product-p (values t i j))))
+  (doranges ((i 10 100) (j 100 1000))
+    (when (and (= (* i j) n)
+	       (has-all-digits i j n))
+      (return-from pandigital-product-p (values t i j))))
+  (values nil nil nil))
+
+(let ((sum 0))
+  (dorange (n 1000 10000)
+    (multiple-value-bind (yes? i j)
+	(pandigital-product-p n)
+      (when yes?
+	(incf sum n)
+	(format t "~d * ~d = ~d~%" i j n))))
+  sum)

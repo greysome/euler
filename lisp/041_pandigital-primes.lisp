@@ -1,0 +1,5 @@
+(dolist (digit-list (permutations (nreverse (range 1 9))))
+  (let ((n (from-digits digit-list)))
+    (when (primep n)
+      (format t "~d is prime!" n)
+      (return))))
